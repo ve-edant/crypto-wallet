@@ -70,7 +70,7 @@ export default function MarketSection() {
             <table className="min-w-[900px] w-full bg-white  border-gray-200 text-sm">
               <thead className="bg-gray-100 text-left">
                 <tr>
-                  <th className="py-2 px-4 border-b sticky left-0 w-[140px] z-20 bg-gray-100">
+                  <th className="py-2 px-4 border-b sticky left-0 top-0 w-[140px] z-20 bg-gray-100">
                     Name
                   </th>
                   <th className="py-2 px-4 border-b">Price</th>
