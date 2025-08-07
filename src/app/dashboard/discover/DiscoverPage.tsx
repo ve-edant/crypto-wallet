@@ -41,13 +41,14 @@ const DiscoverPage = () => {
     fetchCoins();
   }, [currency, sort]);
 
-  const filteredCoins = coins.filter((coin) =>
-    coin.name.toLowerCase().includes(search.toLowerCase()) ||
-    coin.symbol.toLowerCase().includes(search.toLowerCase())
+  const filteredCoins = coins.filter(
+    (coin) =>
+      coin.name.toLowerCase().includes(search.toLowerCase()) ||
+      coin.symbol.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-6">
+    <div className="max-w-6xl mx-auto p-2 space-y-6">
       <h1 className="text-2xl font-semibold">Discover Coins</h1>
 
       {/* Filters */}
@@ -92,12 +93,14 @@ const DiscoverPage = () => {
       ) : error ? (
         <p className="text-red-500">{error}</p>
       ) : (
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm border">
-            <thead className="bg-gray-100">
+        <div className="overflow-y-auto max-h-[600px]">
+          <table className="min-w-full text-sm">
+            <thead className="sticky top-0 bg-gray-100 z-10">
               <tr>
                 <th className="text-left p-2">Coin</th>
-                <th className="text-right p-2">Price ({currency.toUpperCase()})</th>
+                <th className="text-right p-2">
+                  Price ({currency.toUpperCase()})
+                </th>
                 <th className="text-right p-2">Market Cap</th>
                 <th className="text-right p-2">24h % Change</th>
               </tr>
@@ -105,9 +108,11 @@ const DiscoverPage = () => {
             <tbody>
               {filteredCoins.map((coin) => (
                 <tr key={coin.id} className="border-t hover:bg-gray-50">
-                  <td className="flex items-center gap-2 p-2">
+                  <td className="flex items-center gap-3 p-2">
                     <img src={coin.image} alt={coin.name} className="w-5 h-5" />
-                    <span>{coin.name} ({coin.symbol.toUpperCase()})</span>
+                    <span>
+                      {coin.name} ({coin.symbol.toUpperCase()})
+                    </span>
                   </td>
                   <td className="text-right p-2">
                     {coin.current_price.toLocaleString()}
@@ -117,7 +122,9 @@ const DiscoverPage = () => {
                   </td>
                   <td
                     className={`text-right p-2 ${
-                      coin.price_change_percentage_24h > 0 ? "text-green-600" : "text-red-600"
+                      coin.price_change_percentage_24h > 0
+                        ? "text-green-600"
+                        : "text-red-600"
                     }`}
                   >
                     {coin.price_change_percentage_24h.toFixed(2)}%
