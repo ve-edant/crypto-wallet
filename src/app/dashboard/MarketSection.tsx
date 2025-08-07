@@ -86,7 +86,7 @@ export default function MarketSection() {
                 {coins.map((coin) => (
                   <tr key={coin.id} onClick={() => router.push(`/dashboard/coin/${coin.id}`)} className="bg-white hover:bg-gray-300 cursor-pointer">
                     {/* Name with Logo and Symbol */}
-                    <td className="py-2 px-4 border-b sticky md:relative left-0 w-[80px] z-10 ">
+                    <td className="bg-white py-2 px-4 border-b sticky md:relative left-0 w-[80px] z-10 ">
                       <div className="flex items-center gap-3">
                         <img
                           src={coin.image}
