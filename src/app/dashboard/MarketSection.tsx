@@ -107,7 +107,7 @@ export default function MarketSection() {
                       ${coin.current_price.toLocaleString()}
                     </td>
 
-                    <td className="py-2 px-4 border-b border-black">
+                    <td className="py-2 px-4 border-b ">
                       <span
                         className={`${
                           coin.price_change_percentage_24h >= 0
