@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 
@@ -19,6 +20,7 @@ type Coin = {
 };
 
 export default function MarketSection() {
+  const router = useRouter();
   const [coins, setCoins] = useState<Coin[]>([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -70,7 +72,7 @@ export default function MarketSection() {
             <table className="min-w-[900px] w-full bg-white  border-gray-200 text-sm">
               <thead className="bg-gray-100 text-left">
                 <tr>
-                  <th className="py-2 px-4 border-b sticky left-0 top-0 w-[140px] z-20 bg-gray-100">
+                  <th className="py-2 px-4 border-b sticky md:relative left-0 top-0 w-[140px] z-20 bg-gray-100">
                     Name
                   </th>
                   <th className="py-2 px-4 border-b">Price</th>
@@ -82,9 +84,9 @@ export default function MarketSection() {
               </thead>
               <tbody>
                 {coins.map((coin) => (
-                  <tr key={coin.id} className="hover:bg-gray-50">
+                  <tr key={coin.id} onClick={() => router.push(`/dashboard/coin/${coin.id}`)} className="bg-white hover:bg-gray-300 cursor-pointer">
                     {/* Name with Logo and Symbol */}
-                    <td className="py-2 px-4 border-b sticky left-0 w-[80px] z-10 bg-white">
+                    <td className="py-2 px-4 border-b sticky md:relative left-0 w-[80px] z-10 ">
                       <div className="flex items-center gap-3">
                         <img
                           src={coin.image}
@@ -101,7 +103,6 @@ export default function MarketSection() {
                         </div>
                       </div>
                     </td>
-
                     <td className="py-2 px-4 border-b">
                       ${coin.current_price.toLocaleString()}
                     </td>
