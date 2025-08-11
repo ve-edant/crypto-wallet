@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Coin {
@@ -15,6 +16,7 @@ interface Coin {
 const currencies = ["usd", "inr", "eur"];
 
 const DiscoverPage = () => {
+  const router = useRouter();
   const [coins, setCoins] = useState<Coin[]>([]);
   const [search, setSearch] = useState("");
   const [currency, setCurrency] = useState("usd");
@@ -107,7 +109,7 @@ const DiscoverPage = () => {
             </thead>
             <tbody>
               {filteredCoins.map((coin) => (
-                <tr key={coin.id} className="border-t hover:bg-gray-50">
+                <tr key={coin.id} onClick={() => router.push(`/dashboard/coin/${coin.id}`)} className="border-t hover:bg-gray-300 cursor-pointer">
                   <td className="flex items-center gap-3 p-2">
                     <img src={coin.image} alt={coin.name} className="w-5 h-5" />
                     <span>
