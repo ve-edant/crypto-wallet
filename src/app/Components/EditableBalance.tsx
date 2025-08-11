@@ -63,11 +63,11 @@ export function EditableBalanceAssetsList({ initialAssets }: Props) {
   };
 
   return (
-    <div className="space-y-3 max-h-96 overflow-y-auto pr-2">
+    <div className="space-y-3 max-h-96 pr-2 overflow-x-auto">
       {assets.map((asset) => (
         <div
           key={asset.id}
-          className="overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-gray-300"
+          className=" whitespace-nowrap scrollbar-thin scrollbar-thumb-gray-300"
         >
           <div className="flex items-center justify-between gap-4 p-3 rounded-lg hover:bg-gray-50 transition min-w-[600px]">
             {/* Asset Info */}
