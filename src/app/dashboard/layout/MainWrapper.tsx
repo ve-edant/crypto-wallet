@@ -52,10 +52,10 @@ const MainWrapper = ({ children }: { children: React.ReactNode }) => {
             <h1 className="text-lg font-bold">
               {currentPath === "/dashboard"
                 ? "Dashboard"
-                : currentPath === "/dashboard/invoice-create"
-                ? "Create Invoice"
-                : currentPath === "/dashboard/manage-assets"
-                ? "Manage Assets"
+                : currentPath === "/dashboard/fund"
+                ? "Fund Wallets"
+                : currentPath === "/dashboard/discover"
+                ? "Discover"
                 : ""}
             </h1>
           </div>
