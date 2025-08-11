@@ -89,12 +89,7 @@ export function EditableBalanceAssetsList({ initialAssets }: Props) {
             {/* Balance / Change / Sparkline */}
             <div className="flex items-center gap-6 flex-shrink-0">
               {/* Editable totalBalance */}
-              <input
-                type="text"
-                className="text-sm font-medium focus:border-blue-500 focus:outline-none w-20 bg-transparent text-right"
-                value={asset.totalBalance}
-                onChange={(e) => handleBalanceChange(asset.id, e.target.value)}
-              />
+              {asset.totalBalance}
 
               <div
                 className={`text-sm ${

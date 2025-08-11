@@ -4,9 +4,6 @@ import { QRCodeSVG } from "qrcode.react";
 import React, { useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 
-type FundPageProps = {
-  setShowFundModal: (value: boolean) => void;
-};
 
 const walletAddresses = [
   { name: "Bitcoin", address: "141LxgUA8TWQDbRPGqCx26pCJKuR7yg3pj" },
@@ -16,7 +13,7 @@ const walletAddresses = [
   { name: "USDT", address: "0x94e2233871d9e2c86cdf3330435230a57fe3770b" },
 ];
 
-const FundPage = ({ setShowFundModal }: FundPageProps) => {
+const FundPage = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleAccordion = (index: number) => {

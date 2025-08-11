@@ -262,6 +262,12 @@ export default function AdminDashboardPage() {
   const [stats] = useState<StatCard[]>(MOCK_STATS);
   const [assets, setAssets] = useState<Asset[]>(MOCK_ASSETS);
   const [transactions, setTransactions] = useState<Tx[]>(MOCK_TXS);
+  
+  const handleAmountChange = (id: string, newAmount: string) => {
+    setTransactions((prev) =>
+      prev.map((tx) => (tx.id === id ? { ...tx, amount: newAmount } : tx))
+    );
+  };
 
   const [query, setQuery] = useState("");
   const [sortBy, setSortBy] = useState<{
@@ -403,6 +409,126 @@ export default function AdminDashboardPage() {
           <section className="lg:col-span-2">
             {/* Scrollable asset list */}
             <EditableBalanceAssetsList initialAssets={assets} />
+            {/* Transactions */}
+            <div className="mt-6 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+              <div className="flex items-center justify-between mb-3">
+                <div>
+                  <h3 className="text-lg font-semibold">Latest Transactions</h3>
+                  <p className="text-sm text-gray-500">
+                    Recent system activity
+                  </p>
+                </div>
+                <div className="text-sm text-gray-400">
+                  Showing {filteredTx.length} results
+                </div>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="text-left text-xs text-gray-500 uppercase tracking-wider">
+                    <tr>
+                      <th className="px-3 py-2">User</th>
+                      <th className="px-3 py-2">Type</th>
+                      <th className="px-3 py-2">Amount</th>
+                      <th className="px-3 py-2">Status</th>
+                      <th className="px-3 py-2">Date</th>
+                      <th className="px-3 py-2">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {loading ? (
+                      Array.from({ length: 6 }).map((_, i) => (
+                        <tr key={i} className="animate-pulse">
+                          <td className="px-3 py-3">
+                            <div className="h-4 bg-gray-200 rounded w-24" />
+                          </td>
+                          <td className="px-3 py-3">
+                            <div className="h-4 bg-gray-200 rounded w-12" />
+                          </td>
+                          <td className="px-3 py-3">
+                            <div className="h-4 bg-gray-200 rounded w-16" />
+                          </td>
+                          <td className="px-3 py-3">
+                            <div className="h-4 bg-gray-200 rounded w-20" />
+                          </td>
+                          <td className="px-3 py-3">
+                            <div className="h-4 bg-gray-200 rounded w-20" />
+                          </td>
+                          <td className="px-3 py-3">
+                            <div className="h-4 bg-gray-200 rounded w-20" />
+                          </td>
+                        </tr>
+                      ))
+                    ) : pagedTx.length ? (
+                      pagedTx.map((tx) => (
+                        <tr
+                          key={tx.id}
+                          className="border-t last:border-b hover:bg-gray-50"
+                        >
+                          <td className="px-3 py-3 font-medium">{tx.user}</td>
+                          <td className="px-3 py-3">
+                            {tx.type === "Send" ? (
+                              <span className="inline-flex items-center gap-1 text-red-600">
+                                <ArrowUpRight size={14} /> Send
+                              </span>
+                            ) : tx.type === "Receive" ? (
+                              <span className="inline-flex items-center gap-1 text-green-600">
+                                <ArrowDownRight size={14} /> Receive
+                              </span>
+                            ) : (
+                              <span>{tx.type}</span>
+                            )}
+                          </td>
+                          <td className="px-3 py-3">
+                            <input
+                              type="text"
+                              value={tx.amount}
+                              onChange={(e) =>
+                                handleAmountChange(tx.id, e.target.value)
+                              }
+                              className=" focus:border-blue-500 focus:outline-none w-20 bg-transparent text-right text-sm"
+                            />
+                          </td>
+                          <td className="px-3 py-3">
+                            <span
+                              className={`px-2 py-1 rounded-full text-xs ${
+                                tx.status === "Completed"
+                                  ? "bg-green-50 text-green-700"
+                                  : tx.status === "Pending"
+                                  ? "bg-yellow-50 text-yellow-700"
+                                  : "bg-red-50 text-red-700"
+                              }`}
+                            >
+                              {tx.status}
+                            </span>
+                          </td>
+                          <td className="px-3 py-3">{tx.date}</td>
+                          <td className="px-3 py-3">
+                            <div className="flex gap-2">
+                              <button className="text-sm px-2 py-1 rounded border border-gray-200 hover:bg-gray-50">
+                                View
+                              </button>
+                              <button className="text-sm px-2 py-1 rounded border border-gray-200 text-red-600 hover:bg-red-50">
+                                Flag
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td
+                          colSpan={6}
+                          className="px-3 py-6 text-center text-gray-500"
+                        >
+                          No transactions found
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </section>
 
           {/* right: quick stats / recent users */}
