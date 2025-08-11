@@ -82,6 +82,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             </Link>
             <Link
               className="hover:bg-zinc-200 rounded px-2 py-1 cursor-pointer"
+              href="/dashboard/fund"
+            >
+              Fund
+            </Link>
+            <Link
+              className="hover:bg-zinc-200 rounded px-2 py-1 cursor-pointer"
               href="/dashboard/discover"
             >
               Discover
