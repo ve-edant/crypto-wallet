@@ -7,6 +7,8 @@ import { RiArrowLeftRightFill } from "react-icons/ri";
 import { PiBankFill } from "react-icons/pi";
 import Image from "next/image";
 import SendPage from "../Components/SendPage";
+import {QRCodeSVG} from 'qrcode.react';
+import ReceivePage from "../Components/ReceivePage";
 
 const actions = [
   { label: "Send", icon: <IoArrowUp size={20} /> },
@@ -17,6 +19,7 @@ const actions = [
 
 export default function WalletSection() {
   const [showSend, setShowSend] = useState(false);
+  const [showQrModal, setShowQrModal] = useState(false);
 
   return (
     <div className="p-6 overflow-hidden">
@@ -25,13 +28,18 @@ export default function WalletSection() {
         <h1 className="text-4xl font-bold">$0.00</h1>
         <p className="text-sm text-gray-500">Total Balance</p>
       </div>
-
       {/* Actions */}
       <div className="grid grid-cols-4 gap-4 mb-6 text-center sm:flex sm:justify-between">
         {actions.map(({ label, icon }) => (
           <div
             key={label}
-            onClick={() => label === "Send" && setShowSend(true)}
+            onClick={() => {
+              if (label === "Send") {
+                setShowSend(true);
+              } else if (label === "Receive") {
+                setShowQrModal(true);
+              }
+            }}
             className="flex flex-col items-center cursor-pointer group"
           >
             <div className="w-12 h-12 rounded-full bg-emerald-400 flex items-center justify-center mb-1 group-hover:scale-105 transition-transform">
@@ -41,15 +49,17 @@ export default function WalletSection() {
           </div>
         ))}
       </div>
-
       {/* Portfolio */}
       <div>
         <h2 className="text-lg font-semibold mb-4">Your Assets</h2>
         <p className="text-gray-500">No assets yet</p>
       </div>
-
       {/* Send Modal */}
       {showSend && <SendPage onClose={() => setShowSend(false)} />}
+      {/* Receive Modal */}
+      {showQrModal && (
+        <ReceivePage setShowQrModal={()=>setShowQrModal(false)} />
+      )}
     </div>
   );
 }
