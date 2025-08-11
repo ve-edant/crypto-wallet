@@ -33,7 +33,7 @@ export const SelectCrypto: React.FC<SelectCryptoProps> = ({
   }, [search, assets]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div className="absolute bg-white text-black md:rounded-lg w-full h-full md:h-auto sm:w-[600px] sm:top-0 md:top-15 sm:bottom-0 md:bottom-15 overflow-y-auto">
         {/* Header */}
         <div className="p-4 flex items-center justify-between border-b border-gray-700">
