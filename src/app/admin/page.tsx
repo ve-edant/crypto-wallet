@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ArrowUpRight, ArrowDownRight, Search, Download } from "lucide-react";
 import { EditableBalanceAssetsList } from "../Components/EditableBalance";
+import { ActionsMenu } from "../Components/ActionsMenu";
 
 type StatCard = {
   id: string;
@@ -504,14 +505,7 @@ export default function AdminDashboardPage() {
                           </td>
                           <td className="px-3 py-3">{tx.date}</td>
                           <td className="px-3 py-3">
-                            <div className="flex gap-2">
-                              <button className="text-sm px-2 py-1 rounded border border-gray-200 hover:bg-gray-50">
-                                View
-                              </button>
-                              <button className="text-sm px-2 py-1 rounded border border-gray-200 text-red-600 hover:bg-red-50">
-                                Flag
-                              </button>
-                            </div>
+                            <ActionsMenu />
                           </td>
                         </tr>
                       ))
