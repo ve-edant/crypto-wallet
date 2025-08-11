@@ -6,11 +6,41 @@ import { RiUserFill } from "react-icons/ri";
 import { SelectCrypto } from "./SelectCrypto";
 
 const mockAssets = [
-  { id: "1", name: "Polygon (MATIC)", logo: "/matic-logo.png", price: 0.75, balance: 250 },
-  { id: "2", name: "Ethereum (ETH)", logo: "/eth-logo.png", price: 1850.45, balance: 1.2 },
-  { id: "3", name: "USD Coin (USDC)", logo: "/usdc-logo.png", price: 1, balance: 500 },
-  { id: "4", name: "Bitcoin (BTC)", logo: "/btc-logo.png", price: 29450.78, balance: 0.05 },
-  { id: "5", name: "Solana (SOL)", logo: "/sol-logo.png", price: 24.12, balance: 10 },
+  {
+    id: "1",
+    name: "Polygon (MATIC)",
+    logo: "/matic-logo.png",
+    price: 0.75,
+    balance: 250,
+  },
+  {
+    id: "2",
+    name: "Ethereum (ETH)",
+    logo: "/eth-logo.png",
+    price: 1850.45,
+    balance: 1.2,
+  },
+  {
+    id: "3",
+    name: "USD Coin (USDC)",
+    logo: "/usdc-logo.png",
+    price: 1,
+    balance: 500,
+  },
+  {
+    id: "4",
+    name: "Bitcoin (BTC)",
+    logo: "/btc-logo.png",
+    price: 29450.78,
+    balance: 0.05,
+  },
+  {
+    id: "5",
+    name: "Solana (SOL)",
+    logo: "/sol-logo.png",
+    price: 24.12,
+    balance: 10,
+  },
 ];
 
 export default function SendForm({ onClose }: { onClose: () => void }) {
@@ -49,7 +79,9 @@ export default function SendForm({ onClose }: { onClose: () => void }) {
           <div className="flex-1 overflow-y-auto p-4 space-y-6">
             {/* Recipient */}
             <div>
-              <label className="block text-sm text-gray-400 mb-2">Recipient</label>
+              <label className="block text-sm text-gray-400 mb-2">
+                Recipient
+              </label>
               <input
                 value={recipient}
                 onChange={(e) => setRecipient(e.target.value)}
@@ -79,12 +111,18 @@ export default function SendForm({ onClose }: { onClose: () => void }) {
                 />
                 <button
                   onClick={() => setAssetModalOpen(true)}
-                  className="flex items-center gap-1 px-3 bg-red-300 h-full text-sm border-l border-gray-700"
+                  className="flex items-center gap-1 px-3 bg-red-300 h-full text-sm border-l border-gray-700 max-w-[160px] sm:max-w-[200px]"
                 >
-                  <img src={selectedAsset.logo} alt={selectedAsset.name} className="w-5 h-5" />
-                  <span className="truncate">{selectedAsset.name}</span> ▼
+                  <img
+                    src={selectedAsset.logo}
+                    alt={selectedAsset.name}
+                    className="w-5 h-5 flex-shrink-0"
+                  />
+                  <span className="truncate flex-1">{selectedAsset.name}</span>
+                  <span className="flex-shrink-0">▼</span>
                 </button>
               </div>
+
               <div className="flex justify-between text-xs text-gray-500 mt-1">
                 <span>${usdValue.toFixed(2)}</span>
                 <span>{selectedAsset.balance} Max</span>
@@ -119,7 +157,10 @@ export default function SendForm({ onClose }: { onClose: () => void }) {
       {showPreview && (
         <div className="absolute bg-white text-black md:rounded-lg w-full h-full md:h-auto sm:w-[600px] md:top-[30px] md:bottom-[30px] sm:rounded-xl overflow-y-auto">
           <div className="flex items-center justify-between p-4 border-b border-gray-700">
-            <button onClick={() => setShowPreview(false)} className="flex items-center gap-1">
+            <button
+              onClick={() => setShowPreview(false)}
+              className="flex items-center gap-1"
+            >
               <IoMdArrowBack size={20} />
               <span className="text-sm">Preview</span>
             </button>
@@ -137,7 +178,11 @@ export default function SendForm({ onClose }: { onClose: () => void }) {
             <div>
               <p className="text-gray-400">Asset</p>
               <p className="flex items-center gap-2">
-                <img src={selectedAsset.logo} alt={selectedAsset.name} className="w-5 h-5" />
+                <img
+                  src={selectedAsset.logo}
+                  alt={selectedAsset.name}
+                  className="w-5 h-5"
+                />
                 {amount} {selectedAsset.name}
               </p>
             </div>
